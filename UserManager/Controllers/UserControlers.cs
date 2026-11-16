@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserManager.DTO;
 using UserManager.Models;
 using UserManager.Services;
@@ -6,6 +7,7 @@ using UserManager.Services;
 namespace UserManager.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     [Produces("application/json")]
     public class UsersController : ControllerBase

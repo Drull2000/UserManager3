@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using UserManager.Models;
 
 namespace UserManager.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -14,12 +16,6 @@ namespace UserManager.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(u => u.Id);
-                entity.Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(256);
-                entity.HasIndex(u => u.Email)
-                .IsUnique();
                 entity.Property(u => u.FirstName)
                 .IsRequired()
                 .HasMaxLength(100);

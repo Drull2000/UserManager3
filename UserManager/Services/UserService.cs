@@ -21,6 +21,7 @@ namespace UserManager.Services
         public async Task<UserDTO> CreateAsync(CreateUserDTO user)
         {
             var newUser = _mapper.Map<User>(user);
+            newUser.UserName = newUser.Email;
 
             await _appDbContext.Users.AddAsync(newUser);
             await _appDbContext.SaveChangesAsync();
